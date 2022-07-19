@@ -32,7 +32,7 @@ module SolidusKlaviyo
     end
 
     def update_now(list_id, email, properties = {})
-      subscriber.update(list_id, email, properties)
+      subscriber.update_profile(list_id, email, properties)
     end
 
     def update_later(list_id, email, properties = {})
@@ -40,7 +40,7 @@ module SolidusKlaviyo
     end
 
     def bulk_update_now(list_id, profiles)
-      subscriber.bulk_update(list_id, profiles)
+      subscriber.update_profile(list_id, profiles)
     end
 
     def bulk_update_later(list_id, profiles)
@@ -50,7 +50,7 @@ module SolidusKlaviyo
     private
 
     def subscriber
-      @subscriber ||= SolidusKlaviyo::Subscriber.new(api_key: configuration.api_key)
+      @subscriber ||= ::Klaviyo
     end
   end
 end
