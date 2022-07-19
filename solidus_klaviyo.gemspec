@@ -5,8 +5,8 @@ require_relative 'lib/solidus_klaviyo/version'
 Gem::Specification.new do |spec|
   spec.name = 'solidus_klaviyo'
   spec.version = SolidusKlaviyo::VERSION
-  spec.authors = ['Alessandro Desantis']
-  spec.email = 'desa.alessandro@gmail.com'
+  spec.authors = ['Alessandro Desantis', 'Jonathan Tapia']
+  spec.email = 'jtapia.dev@gmail.com'
 
   spec.summary = 'Klaviyo integration for Solidus stores.'
   spec.homepage = 'https://github.com/solidusio-contrib/solidus_klaviyo'

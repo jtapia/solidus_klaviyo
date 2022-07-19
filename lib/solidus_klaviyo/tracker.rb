@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'klaviyo_sdk'
+
 module SolidusKlaviyo
   class Tracker < SolidusTracking::Tracker
     class << self
