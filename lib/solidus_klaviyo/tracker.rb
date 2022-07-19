@@ -9,19 +9,22 @@ module SolidusKlaviyo
     end
 
     def track(event)
-      klaviyo.track(
-        event.name,
-        email: event.email,
-        customer_properties: event.customer_properties,
-        properties: event.properties,
-        time: event.time,
-      )
+      track_payload = {
+        'event': event.name,
+        'customer_properties': event.customer_properties,
+        'properties': event.properties
+      }
+      data = track_payload.to_json
+      tracker = Klaviyo::TrackIdentifyApi.new(klaviyo)
+      tracker.track_post(data)
     end
 
     private
 
     def klaviyo
-      @klaviyo ||= Klaviyo::Client.new(options.fetch(:api_key))
+      @klaviyo ||= Klaviyo::ApiClient.default
+      @klaviyo.config.api_key = options.fetch(:api_key)
+      @klaviyo
     end
   end
 end

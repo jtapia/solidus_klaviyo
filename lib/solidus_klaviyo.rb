@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'httparty'
-require 'klaviyo'
+require 'klaviyo_sdk'
 require 'solidus_core'
 require 'solidus_support'
 require 'solidus_tracking'
