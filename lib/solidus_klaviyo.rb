@@ -50,7 +50,10 @@ module SolidusKlaviyo
     private
 
     def subscriber
-      @subscriber ||= ::Klaviyo
+      @subscriber ||= SolidusKlaviyo::Subscriber.new(
+        api_key: configuration.api_key,
+        public_key: configuration.public_key
+      )
     end
   end
 end
