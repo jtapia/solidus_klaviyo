@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::User do
+RSpec.describe Spree::LegacyUser, type: :model do
   describe '#save' do
     context 'when default_list is set' do
       it 'subscribes the user to the default list' do
@@ -22,8 +22,8 @@ RSpec.describe Spree::User do
 
     context 'when default_list is not set' do
       it 'does not subscribe the user to any list' do
-        allow(SolidusKlaviyo.configuration).to receive(:default_list).and_return(nil)
-
+        allow(SolidusKlaviyo.configuration)
+            .to receive(:default_list).and_return(nil)
         create(:user)
 
         expect(SolidusKlaviyo::SubscribeJob).not_to have_been_enqueued

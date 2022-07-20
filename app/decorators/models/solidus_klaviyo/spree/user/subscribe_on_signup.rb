@@ -5,23 +5,25 @@ module SolidusKlaviyo
     module User
       module SubscribeOnSignup
         def self.prepended(base)
-          base.after_commit :subscribe_to_klaviyo, on: :create
+          base.class_eval do
+            after_commit :subscribe_to_klaviyo, on: :create
+
+            private
+
+            def subscribe_to_klaviyo
+              return unless SolidusKlaviyo.configuration.default_list
+
+              SolidusKlaviyo.subscribe_later(
+                SolidusKlaviyo.configuration.default_list,
+                email,
+                SolidusTracking::Serializer::User.serialize(self),
+              )
+            end
+          end
         end
 
-        private
-
-        def subscribe_to_klaviyo
-          return unless SolidusKlaviyo.configuration.default_list
-
-          SolidusKlaviyo.subscribe_later(
-            SolidusKlaviyo.configuration.default_list,
-            email,
-            SolidusTracking::Serializer::User.serialize(self),
-          )
-        end
+        ::Spree.user_class.prepend(self)
       end
     end
   end
 end
-
-Spree.user_class.prepend(SolidusKlaviyo::Spree::User::SubscribeOnSignup)

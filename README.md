@@ -1,6 +1,6 @@
 # solidus_klaviyo
 
-[![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_klaviyo.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_klaviyo)
+[![CircleCI](https://circleci.com/gh/jtapia/solidus_klaviyo.svg?style=svg)](https://circleci.com/gh/jtapia/solidus_klaviyo)
 
 This extension allows you to integrate your [Solidus](https://solidus.io) store with
 [Klaviyo](https://klaviyo.com) via [solidus_tracking](https://github.com/solidusio-contrib/solidus_tracking).
@@ -11,7 +11,7 @@ Add solidus_tracking and solidus_klaviyo to your Gemfile:
 
 ```ruby
 gem 'solidus_tracking', github: 'solidusio-contrib/solidus_tracking'
-gem 'solidus_klaviyo', github: 'solidusio-contrib/solidus_klaviyo'
+gem 'solidus_klaviyo', github: 'jtapia/solidus_klaviyo'
 ```
 
 Bundle your dependencies and run the installation generator:
