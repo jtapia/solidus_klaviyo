@@ -3,8 +3,10 @@
 RSpec.describe SolidusKlaviyo::Subscriber do
   describe '.from_config' do
     it 'returns a tracker with the configured API key' do
-      allow(SolidusKlaviyo.configuration).to receive(:api_key).and_return('test_key')
-      allow(SolidusKlaviyo.configuration).to receive(:public_key).and_return('test_public_key')
+      allow(SolidusKlaviyo.configuration)
+        .to receive(:api_key).and_return('test_key')
+      allow(SolidusKlaviyo.configuration)
+        .to receive(:public_key).and_return('test_public_key')
 
       subscriber = described_class.from_config
 
@@ -28,7 +30,9 @@ RSpec.describe SolidusKlaviyo::Subscriber do
         end
 
         expect(
-          a_request(:post, "https://a.klaviyo.com/api/v2/list/#{list_id}/subscribe")
+          a_request(
+            :post, "https://a.klaviyo.com/api/v2/list/#{list_id}/subscribe"
+          )
         ).to have_been_made
       end
     end
@@ -131,14 +135,19 @@ RSpec.describe SolidusKlaviyo::Subscriber do
           public_key: 'test_public_key'
         )
         list_id = 'dummyListId'
-        profile = {email: 'jdoe@example.com'}
+        profile = {
+          email: 'jdoe@example.com'
+        }
 
         VCR.use_cassette('update') do
           subscriber.bulk_update(list_id, profile)
         end
 
         expect(
-          a_request(:post, "https://a.klaviyo.com/api/v2/list/#{list_id}/members")
+          a_request(
+            :post,
+            "https://a.klaviyo.com/api/v2/list/#{list_id}/members"
+          )
         ).to have_been_made
       end
     end
@@ -150,7 +159,9 @@ RSpec.describe SolidusKlaviyo::Subscriber do
           public_key: 'test_public_key'
         )
         list_id = 'dummyListId'
-        profile = {email: 'jdoe@example.com'}
+        profile = {
+          email: 'jdoe@example.com'
+        }
 
         expect {
           VCR.use_cassette('update-rate-limited') do
@@ -167,7 +178,9 @@ RSpec.describe SolidusKlaviyo::Subscriber do
           public_key: 'test_public_key'
         )
         list_id = 'wrongListId'
-        profile = {email: 'jdoe@example.com'}
+        profile = {
+          email: 'jdoe@example.com'
+        }
 
         expect {
           VCR.use_cassette('update') do

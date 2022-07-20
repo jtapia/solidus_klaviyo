@@ -23,7 +23,7 @@ RSpec.describe Spree::LegacyUser, type: :model do
     context 'when default_list is not set' do
       it 'does not subscribe the user to any list' do
         allow(SolidusKlaviyo.configuration)
-            .to receive(:default_list).and_return(nil)
+          .to receive(:default_list).and_return(nil)
         create(:user)
 
         expect(SolidusKlaviyo::SubscribeJob).not_to have_been_enqueued

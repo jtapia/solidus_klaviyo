@@ -4,9 +4,9 @@ RSpec.describe SolidusKlaviyo::Tracker do
   describe '.from_config' do
     it 'returns a tracker with the configured API key' do
       allow(SolidusKlaviyo.configuration)
-          .to receive(:api_key).and_return('test_key')
+        .to receive(:api_key).and_return('test_key')
       allow(SolidusKlaviyo.configuration)
-          .to receive(:public_key).and_return('test_public_key')
+        .to receive(:public_key).and_return('test_public_key')
 
       tracker = described_class.from_config
 
