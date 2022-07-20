@@ -2,16 +2,20 @@
 
 module SolidusKlaviyo
   class Subscriber
-    attr_reader :api_key
+    attr_reader :api_key, :public_key
 
     class << self
       def from_config
-        new(api_key: SolidusKlaviyo.configuration.api_key)
+        new(
+          api_key: SolidusKlaviyo.configuration.api_key,
+          public_key: SolidusKlaviyo.configuration.public_key,
+        )
       end
     end
 
-    def initialize(api_key:)
+    def initialize(api_key:, public_key:)
       @api_key = api_key
+      @public_key = public_key
     end
 
     def subscribe(list_id, email, properties = {})
@@ -35,6 +39,7 @@ module SolidusKlaviyo
         "https://a.klaviyo.com/api/v2/list/#{list_id}/#{object}",
         body: {
           api_key: api_key,
+          token: public_key,
           profiles: profiles,
         }.to_json,
         headers: {

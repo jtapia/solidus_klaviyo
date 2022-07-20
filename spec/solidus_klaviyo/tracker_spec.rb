@@ -4,10 +4,12 @@ RSpec.describe SolidusKlaviyo::Tracker do
   describe '.from_config' do
     it 'returns a tracker with the configured API key' do
       allow(SolidusKlaviyo.configuration).to receive(:api_key).and_return('test_key')
+      allow(SolidusKlaviyo.configuration).to receive(:public_key).and_return('test_public_key')
 
       tracker = described_class.from_config
 
       expect(tracker.options[:api_key]).to eq('test_key')
+      expect(tracker.options[:public_key]).to eq('test_public_key')
     end
   end
 
@@ -24,7 +26,10 @@ RSpec.describe SolidusKlaviyo::Tracker do
         time: time,
       )
 
-      event_tracker = described_class.new(api_key: 'test_key')
+      event_tracker = described_class.new(
+        api_key: 'test_key',
+        public_key: 'test_public_key'
+      )
       event_tracker.track(event)
 
       expect(klaviyo_client).to have_received(:track).with(

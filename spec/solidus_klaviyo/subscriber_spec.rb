@@ -4,17 +4,22 @@ RSpec.describe SolidusKlaviyo::Subscriber do
   describe '.from_config' do
     it 'returns a tracker with the configured API key' do
       allow(SolidusKlaviyo.configuration).to receive(:api_key).and_return('test_key')
+      allow(SolidusKlaviyo.configuration).to receive(:public_key).and_return('test_public_key')
 
       subscriber = described_class.from_config
 
       expect(subscriber.api_key).to eq('test_key')
+      expect(subscriber.public_key).to eq('test_public_key')
     end
   end
 
   describe '#subscribe' do
     context 'when the request is well-formed' do
       it 'subscribes the given email to the configured list' do
-        subscriber = described_class.new(api_key: 'test_key')
+        subscriber = described_class.new(
+          api_key: 'test_key',
+          public_key: 'test_public_key'
+        )
         list_id = 'dummyListId'
         email = 'jdoe@example.com'
 
@@ -30,7 +35,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
 
     context 'when the request is rate-limited' do
       it 'raises a RateLimitedError' do
-        subscriber = described_class.new(api_key: 'test_key')
+        subscriber = described_class.new(
+          api_key: 'test_key',
+          public_key: 'test_public_key'
+        )
         list_id = 'dummyListId'
         email = 'jdoe@example.com'
 
@@ -44,7 +52,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
 
     context 'when the request is malformed' do
       it 'raises a SubscriptionError' do
-        subscriber = described_class.new(api_key: 'test_key')
+        subscriber = described_class.new(
+          api_key: 'test_key',
+          public_key: 'test_public_key'
+        )
         list_id = 'wrongListId'
         email = 'jdoe@example.com'
 
@@ -60,7 +71,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
   describe '#update' do
     context 'when the request is well-formed' do
       it 'updates the given email on the configured list' do
-        subscriber = described_class.new(api_key: 'test_key')
+        subscriber = described_class.new(
+          api_key: 'test_key',
+          public_key: 'test_public_key'
+        )
         list_id = 'dummyListId'
         email = 'jdoe@example.com'
 
@@ -76,7 +90,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
 
     context 'when the request is rate-limited' do
       it 'raises a RateLimitedError' do
-        subscriber = described_class.new(api_key: 'test_key')
+        subscriber = described_class.new(
+          api_key: 'test_key',
+          public_key: 'test_public_key'
+        )
         list_id = 'dummyListId'
         email = 'jdoe@example.com'
 
@@ -90,7 +107,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
 
     context 'when the request is malformed' do
       it 'raises a SubscriptionError' do
-        subscriber = described_class.new(api_key: 'test_key')
+        subscriber = described_class.new(
+          api_key: 'test_key',
+          public_key: 'test_public_key'
+        )
         list_id = 'wrongListId'
         email = 'jdoe@example.com'
 
@@ -106,7 +126,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
   describe '#bulk_update' do
     context 'when the request is well-formed' do
       it 'updates the profile on the configured list' do
-        subscriber = described_class.new(api_key: 'test_key')
+        subscriber = described_class.new(
+          api_key: 'test_key',
+          public_key: 'test_public_key'
+        )
         list_id = 'dummyListId'
         profile = {email: 'jdoe@example.com'}
 
@@ -122,7 +145,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
 
     context 'when the request is rate-limited' do
       it 'raises a RateLimitedError' do
-        subscriber = described_class.new(api_key: 'test_key')
+        subscriber = described_class.new(
+          api_key: 'test_key',
+          public_key: 'test_public_key'
+        )
         list_id = 'dummyListId'
         profile = {email: 'jdoe@example.com'}
 
@@ -136,7 +162,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
 
     context 'when the request is malformed' do
       it 'raises a SubscriptionError' do
-        subscriber = described_class.new(api_key: 'test_key')
+        subscriber = described_class.new(
+          api_key: 'test_key',
+          public_key: 'test_public_key'
+        )
         list_id = 'wrongListId'
         profile = {email: 'jdoe@example.com'}
 
