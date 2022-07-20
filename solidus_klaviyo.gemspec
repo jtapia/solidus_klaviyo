@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.license = 'BSD-3-Clause'
 
   s.metadata['homepage_uri'] = s.homepage
-  s.metadata['source_code_uri'] = 'https://github.com/jtapia/solidus_klaviyo'
-  s.metadata['changelog_uri'] = 'https://github.com/jtapia/solidus_klaviyo/blob/master/CHANGELOG.md'
+  s.metadata['source_code_uri'] = 'https://github.com/Minimal-Audio/solidus_klaviyo'
+  s.metadata['changelog_uri'] = 'https://github.com/Minimal-Audio/solidus_klaviyo/blob/master/CHANGELOG.md'
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
 
