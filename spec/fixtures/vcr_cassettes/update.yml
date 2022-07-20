@@ -5,7 +5,7 @@ http_interactions:
     uri: https://a.klaviyo.com/api/v2/list/dummyListId/members
     body:
       encoding: UTF-8
-      string: '{"api_key":"secret123","profiles":[{"email":"jdoe@example.com"}]}'
+      string: '{"api_key":"secret123","token":"publicKey","profiles":[{"email":"jdoe@example.com"}]}'
     headers:
       Content-Type:
       - application/json
@@ -36,14 +36,14 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"api_key":"secret123","profiles":[{"email":"jdoe@example.com"}]}'
+      string: '{"api_key":"secret123","token":"publicKey","profiles":[{"email":"jdoe@example.com"}]}'
   recorded_at: Thu, 24 Dec 2020 22:37:33 GMT
 - request:
     method: post
     uri: https://a.klaviyo.com/api/v2/list/wrongListId/members
     body:
       encoding: UTF-8
-      string: '{"api_key":"secret123","profiles":[{"email":"jdoe@example.com"}]}'
+      string: '{"api_key":"secret123","token":"publicKey","profiles":[{"email":"jdoe@example.com"}]}'
     headers:
       Content-Type:
       - application/json

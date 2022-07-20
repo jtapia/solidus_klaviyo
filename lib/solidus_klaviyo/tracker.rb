@@ -6,12 +6,16 @@ module SolidusKlaviyo
   class Tracker < SolidusTracking::Tracker
     class << self
       def from_config
-        new(api_key: SolidusKlaviyo.configuration.api_key)
+        new(
+          api_key: SolidusKlaviyo.configuration.api_key,
+          public_key: SolidusKlaviyo.configuration.public_key
+        )
       end
     end
 
     def track(event)
       track_payload = {
+        'token': options.fetch(:public_key),
         'event': event.name,
         'customer_properties': event.customer_properties,
         'properties': event.properties
