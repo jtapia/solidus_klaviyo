@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://a.klaviyo.com/api/track
+    body:
+      encoding: UTF-8
+      string: data=%7B%3Atoken%3D%3E%22test_public_key%22%2C%20%3Aevent%3D%3E%22Started%20Checkout%22%2C%20%3Acustomer_properties%3D%3E%7B%22%24email%22%3D%3E%22jdoe%40example.com%22%7D%2C%20%3Aproperties%3D%3E%7B%22foo%22%3D%3E%22bar%22%7D%7D
+    headers:
+      User-Agent:
+      - klaviyo-ruby/1.0.3.20220329
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - text/html
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Wed, 20 Jul 2022 19:40:59 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Cf-Ray:
+      - 72de2bf51d237b25-LAX
+      Access-Control-Allow-Origin:
+      - http://www.klaviyo.com
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Vary:
+      - Accept, Cookie
+      Cf-Cache-Status:
+      - DYNAMIC
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - ''
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Access-Control-Max-Age:
+      - '86400'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      X-Robots-Tag:
+      - noindex, nofollow
+      Set-Cookie:
+      - __cf_bm=djUpcveYxxiX5pr8Iy8YR3OyQg6.693LJTEDXSmalKA-1658346059-0-AfNi4tIoJbkIqxJAlBBF6ukgXjQh8AQyUzMU0W+Jx93OklgG6rIWVZ5PTKJfwDfigjTkIhJAj+GPDe4eYBW42yE=;
+        path=/; expires=Wed, 20-Jul-22 20:10:59 GMT; domain=.klaviyo.com; HttpOnly;
+        Secure; SameSite=None
+      Server:
+      - cloudflare
+    body:
+      encoding: ASCII-8BIT
+      string: '0'
+  recorded_at: Wed, 20 Jul 2022 19:40:59 GMT
+recorded_with: VCR 6.1.0
