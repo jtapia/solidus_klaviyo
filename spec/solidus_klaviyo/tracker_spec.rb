@@ -17,18 +17,16 @@ RSpec.describe SolidusKlaviyo::Tracker do
 
   describe '#track' do
     it 'tracks the event through the Klaviyo API' do
-      VCR.use_cassette('track') do
-        klaviyo_client = stub_klaviyo_client
-        event = {
-          'token': 'test_public_key',
-          'event': 'Started Checkout',
-          'customer_properties': { '$email' => 'jdoe@example.com' },
-          'properties': { 'foo' => 'bar' }
-        }
+      klaviyo_client = stub_klaviyo_client
+      event = {
+        'token': 'test_public_key',
+        'event': 'Started Checkout',
+        'customer_properties': { '$email' => 'jdoe@example.com' },
+        'properties': { 'foo' => 'bar' }
+      }
 
-        event_tracker = Klaviyo::TrackIdentifyApi.new(klaviyo_client)
-        expect(event_tracker.track_post(event)).to eq('0')
-      end
+      event_tracker = Klaviyo::TrackIdentifyApi.new(klaviyo_client)
+      expect(event_tracker.track_post(event)).to eq('0')
     end
   end
 
