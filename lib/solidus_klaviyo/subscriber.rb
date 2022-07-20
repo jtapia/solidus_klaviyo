@@ -20,16 +20,16 @@ module SolidusKlaviyo
 
     def subscribe(list_id, email, properties = {})
       profiles = [properties.merge('email' => email)]
-      request(list_id, profiles, "subscribe")
+      request(list_id, profiles, 'subscribe')
     end
 
     def update(list_id, email, properties = {})
       profiles = [properties.merge('email' => email)]
-      request(list_id, profiles, "members")
+      request(list_id, profiles, 'members')
     end
 
     def bulk_update(list_id, profiles)
-      request(list_id, profiles, "members")
+      request(list_id, profiles, 'members')
     end
 
     private

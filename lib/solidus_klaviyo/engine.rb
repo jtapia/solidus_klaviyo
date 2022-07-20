@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'spree/core'
-require 'solidus_klaviyo'
+require 'solidus_core'
+require 'solidus_support'
 
 module SolidusKlaviyo
   class Engine < Rails::Engine
