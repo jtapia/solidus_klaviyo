@@ -12,7 +12,7 @@ require 'solidus_klaviyo/tracker'
 require 'solidus_klaviyo/subscriber'
 require 'solidus_klaviyo/errors'
 
-require 'klaviyo_sdk'
+require 'klaviyo-api-sdk'
 
 module SolidusKlaviyo
   class << self
@@ -24,20 +24,20 @@ module SolidusKlaviyo
       yield configuration
     end
 
-    def subscribe_now(list_id, email, properties = {})
-      subscriber.subscribe(list_id, email, properties)
+    def subscribe_now(list_id, email)
+      subscriber.subscribe(list_id, email)
     end
 
-    def subscribe_later(list_id, email, properties = {})
-      SolidusKlaviyo::SubscribeJob.perform_later(list_id, email, properties)
+    def subscribe_later(list_id, email)
+      SolidusKlaviyo::SubscribeJob.perform_later(list_id, email)
     end
 
-    def update_now(list_id, email, properties = {})
+    def update_now(email, properties = {})
       subscriber.update(list_id, email, properties)
     end
 
-    def update_later(list_id, email, properties = {})
-      SolidusKlaviyo::UpdateJob.perform_later(list_id, email, properties)
+    def update_later(email, properties = {})
+      SolidusKlaviyo::UpdateJob.perform_later(email, properties)
     end
 
     def bulk_update_now(list_id, profiles)

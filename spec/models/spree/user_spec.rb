@@ -14,8 +14,7 @@ RSpec.describe Spree::LegacyUser, type: :model do
 
         expect(SolidusKlaviyo::SubscribeJob).to have_been_enqueued.with(
           'dummyList',
-          user.email,
-          properties,
+          user.email
         )
       end
     end

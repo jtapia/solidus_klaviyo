@@ -18,18 +18,83 @@ module SolidusKlaviyo
       @public_key = public_key
     end
 
-    def subscribe(list_id, email, properties = {})
-      profiles = [properties.merge('email' => email)]
-      request(list_id, profiles, 'subscribe')
+    def subscribe(list_id, email)
+      payload = {
+        data: {
+          type: 'profile-subscription-bulk-create-job',
+          attributes: {
+            profiles: {
+              data: [
+                {
+                  type: 'profile',
+                  attributes: {
+                    email: email.to_s,
+                    subscriptions: {
+                      email: {
+                        marketing: {
+                          consent: 'SUBSCRIBED'
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          relationships: {
+            list: {
+              data: {
+                type: 'list',
+                id: list_id
+              }
+            }
+          }
+        }
+      }
+
+      ::KlaviyoAPI::Profiles.subscribe_profiles(payload)
     end
 
-    def update(list_id, email, properties = {})
-      profiles = [properties.merge('email' => email)]
-      request(list_id, profiles, 'members')
+    def update(id, email, properties = {})
+      profile = get_profile_by_email(email)
+      profile_id = profile[:data][0].try(:[], :id)
+
+      payload = {
+        data: {
+          type: 'profile',
+          id: profile_id,
+          attributes: {
+            properties: properties
+          }
+        }
+      }
+
+      ::KlaviyoAPI::Profiles.update_profile(profile_id, payload)
     end
 
     def bulk_update(list_id, profiles)
-      request(list_id, profiles, 'members')
+      payload = {
+        data: {
+          type: 'profile-bulk-import-job',
+          attributes: {
+            profiles: {
+              data: build_profile_payload(profiles)
+            }
+          },
+          relationships: {
+            lists: {
+              data: [
+                {
+                  type: 'list',
+                  id: list_id
+                }
+              ]
+            }
+          }
+        }
+      }
+
+      ::KlaviyoAPI::Profiles.spawn_bulk_profile_import_job(payload)
     end
 
     private
@@ -58,6 +123,32 @@ module SolidusKlaviyo
       end
 
       response
+    end
+
+    def get_profile_by_email(email)
+      KlaviyoAPI::Profiles.get_profiles(
+        {
+          filter: "any(email,['#{email}'])"
+        }
+      )
+    end
+
+    def build_profile_payload(profiles)
+      profiles_payload = []
+
+      profiles.each do |profile|
+        profiles_payload << {
+          type: 'profile',
+          id: profile[:id],
+          attributes: {
+            email: profile[:email],
+            first_name: profile[:first_name],
+            last_name: profile[:last_name]
+          }
+        }
+      end
+
+      profiles_payload
     end
   end
 end

@@ -8,12 +8,18 @@ RSpec.describe SolidusKlaviyo::UpdateJob do
       solidus_klaviyo = class_spy(SolidusKlaviyo)
       stub_const('SolidusKlaviyo', solidus_klaviyo)
 
-      described_class.perform_now('dummyListId', 'jdoe@example.com', first_name: 'John')
+      described_class.perform_now(
+        'jdoe@example.com',
+        {
+          first_name: 'John')
+        }
+      )
 
       expect(solidus_klaviyo).to have_received(:update_now).with(
-        'dummyListId',
         'jdoe@example.com',
-        first_name: 'John',
+        {
+          first_name: 'John'
+        }
       )
     end
   end
@@ -27,12 +33,18 @@ RSpec.describe SolidusKlaviyo::UpdateJob do
             parsed_response: { 'detail' => 'error message' },
           )))
 
-        described_class.perform_now('dummyListId', 'jdoe@example.com', first_name: 'John')
+        described_class.perform_now(
+          'jdoe@example.com',
+          {
+            first_name: 'John'
+          }
+        )
 
         expect(described_class).to have_been_enqueued.with(
-          'dummyListId',
           'jdoe@example.com',
-          first_name: 'John',
+          {
+            first_name: 'John'
+          }
         ).at(60.seconds.from_now)
       end
     end

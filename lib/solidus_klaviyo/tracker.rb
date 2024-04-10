@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'klaviyo_sdk'
+require 'klaviyo-api-sdk'
 
 module SolidusKlaviyo
   class Tracker < SolidusTracking::Tracker
@@ -14,23 +14,40 @@ module SolidusKlaviyo
     end
 
     def track(event)
-      track_payload = {
-        'token': options.fetch(:public_key),
-        'event': event.name,
-        'customer_properties': event.customer_properties,
-        'properties': event.properties
-      }
-      data = track_payload.to_json
-      tracker = Klaviyo::TrackIdentifyApi.new(klaviyo)
-      tracker.track_post(data)
+      ::KlaviyoAPI::Events.create_event(
+        track_payload(event)
+      )
     end
 
-    private
-
-    def klaviyo
-      @klaviyo ||= Klaviyo::ApiClient.default
-      @klaviyo.config.api_key = options.fetch(:api_key)
-      @klaviyo
+    def track_payload(event)
+      {
+        data: {
+          type: 'event',
+          attributes: {
+            properties: {
+              event: event.name,
+              customer_properties: event&.customer_properties,
+              properties: event&.properties
+            },
+            metric: {
+              data: {
+                type: 'metric',
+                attributes: {
+                  name: event&.name
+                }
+              }
+            },
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: {
+                  email: event&.customer_properties.try(:[], '$email')
+                }
+              }
+            }
+          }
+        }
+      }
     end
   end
 end

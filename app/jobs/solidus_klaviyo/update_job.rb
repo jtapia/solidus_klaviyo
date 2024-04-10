@@ -4,10 +4,10 @@ module SolidusKlaviyo
   class UpdateJob < ApplicationJob
     queue_as :default
 
-    def perform(list_id, email, properties = {})
-      SolidusKlaviyo.update_now(list_id, email, properties)
+    def perform(email, properties = {})
+      SolidusKlaviyo.update_now(email, properties)
     rescue SolidusKlaviyo::RateLimitedError => e
-      self.class.set(wait: e.retry_after).perform_later(list_id, email, properties)
+      self.class.set(wait: e.retry_after).perform_later(email, properties)
     end
   end
 end
