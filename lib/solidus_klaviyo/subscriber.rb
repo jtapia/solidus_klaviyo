@@ -6,10 +6,12 @@ module SolidusKlaviyo
 
     class << self
       def from_config
-        new(
-          api_key: SolidusKlaviyo.configuration.api_key,
-          public_key: SolidusKlaviyo.configuration.public_key,
-        )
+        # Setup authorization
+        KlaviyoAPI.configure do |config|
+          config.api_key['Klaviyo-API-Key'] = "Klaviyo-API-Key #{SolidusKlaviyo.configuration.api_key}"
+        end
+
+        new(api_key: SolidusKlaviyo.configuration.api_key)
       end
     end
 
@@ -56,7 +58,7 @@ module SolidusKlaviyo
     end
 
     def update(id, email, properties = {})
-      profile = get_profile_by_email(email)
+      profile = SolidusKlaviyo::Profiler.get_profile_by_email(email)
       profile_id = profile[:data][0].try(:[], :id)
 
       payload = {
@@ -78,7 +80,7 @@ module SolidusKlaviyo
           type: 'profile-bulk-import-job',
           attributes: {
             profiles: {
-              data: build_profile_payload(profiles)
+              data: build_profiles_payload(profiles)
             }
           },
           relationships: {
@@ -99,41 +101,7 @@ module SolidusKlaviyo
 
     private
 
-    def request(list_id, profiles, object)
-      response = HTTParty.post(
-        "https://a.klaviyo.com/api/v2/list/#{list_id}/#{object}",
-        body: {
-          api_key: api_key,
-          token: public_key,
-          profiles: profiles,
-        }.to_json,
-        headers: {
-          'Content-Type' => 'application/json',
-          'Accept' => 'application/json',
-        }
-      )
-
-      unless response.success?
-        case response.code
-        when 429
-          raise(RateLimitedError, response)
-        else
-          raise(SubscriptionError, response)
-        end
-      end
-
-      response
-    end
-
-    def get_profile_by_email(email)
-      KlaviyoAPI::Profiles.get_profiles(
-        {
-          filter: "any(email,['#{email}'])"
-        }
-      )
-    end
-
-    def build_profile_payload(profiles)
+    def build_profiles_payload(profiles)
       profiles_payload = []
 
       profiles.each do |profile|
