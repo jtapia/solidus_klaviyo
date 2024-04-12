@@ -15,6 +15,8 @@ module SolidusKlaviyo
 
     # This method is called by SolidusTracking on `track` call
     def track(event)
+      return if event.customer_properties.try(:[], '$email').blank?
+
       payload = {
         data: {
           type: 'event',
@@ -32,7 +34,7 @@ module SolidusKlaviyo
               data: {
                 type: 'profile',
                 attributes: {
-                  email: event.customer_properties['$email'] || SolidusKlaviyo.configuration.email,
+                  email: event.customer_properties['$email'],
                   properties: event.customer_properties
                 }
               }
@@ -47,6 +49,8 @@ module SolidusKlaviyo
 
     # This method is called directly to send custom information
     def create_event(event_name, email, properties = {})
+      return if email.blank?
+
       payload = {
         data: {
           type: 'event',
@@ -64,7 +68,8 @@ module SolidusKlaviyo
               data: {
                 type: 'profile',
                 attributes: {
-                  email: email || SolidusKlaviyo.configuration.email
+                  email: email,
+                  properties: properties
                 }
               }
             }
