@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# require 'klaviyo-api-sdk'
-
 module SolidusKlaviyo
   class Tracker < SolidusTracking::Tracker
     class << self
@@ -47,7 +45,7 @@ module SolidusKlaviyo
       ::KlaviyoAPI::Events.create_event(payload)
     end
 
-    # This method is called directly to send more information
+    # This method is called directly to send custom information
     def create_event(event_name, email, properties = {})
       payload = {
         data: {

@@ -20,12 +20,12 @@ module SolidusKlaviyo
       @public_key = public_key
     end
 
-    def get_profiles(query)
-      ::KlaviyoAPI::Profiles.get_profiles(query)
-    end
-
     def get_profile(id, query)
       ::KlaviyoAPI::Profiles.get_profile(id, query)
+    end
+
+    def get_profiles(query)
+      ::KlaviyoAPI::Profiles.get_profiles(query)
     end
 
     def get_profile_by_email(email)

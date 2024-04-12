@@ -53,8 +53,8 @@ module SolidusKlaviyo
       profiler.get_profile(profile_id, query)
     end
 
-    def get_profiles(email)
-      profiler.get_profiles(email)
+    def get_profiles(query)
+      profiler.get_profiles(query)
     end
 
     def get_profile_by_email(email)

@@ -9,8 +9,7 @@ Gem::Specification.new do |s|
   s.email = 'jtapia.dev@gmail.com'
 
   s.summary = 'Klaviyo integration for Solidus stores.'
-  s.description = 'Klaviyo integration for Solidus stores.'
-  s.homepage = 'https://github.com/jtapia/solidus_klaviyo'
+  s.homepage = 'https://github.com/solidusio-contrib/solidus_klaviyo'
   s.license = 'BSD-3-Clause'
 
   s.metadata['homepage_uri'] = s.homepage
@@ -33,8 +32,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'solidus_support', '~> 0.5'
 
   s.add_dependency 'httparty', '~> 0.18'
-  s.add_dependency 'klaviyo-api-sdk'
   s.add_dependency 'solidus_tracking'
+  s.add_dependency 'klaviyo-api-sdk'
 
   s.add_development_dependency 'pry'
   s.add_development_dependency 'solidus_dev_support', '~> 2.5'
