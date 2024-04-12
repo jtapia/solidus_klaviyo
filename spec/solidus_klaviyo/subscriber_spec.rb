@@ -4,12 +4,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
   describe '.from_config' do
     it 'returns a tracker with the configured API key' do
       allow(SolidusKlaviyo.configuration).to receive(:api_key).and_return('test_key')
-      allow(SolidusKlaviyo.configuration).to receive(:public_key).and_return('test_public_key')
 
       subscriber = described_class.from_config
 
       expect(subscriber.api_key).to eq('test_key')
-      expect(subscriber.public_key).to eq('test_public_key')
     end
   end
 
@@ -17,10 +15,9 @@ RSpec.describe SolidusKlaviyo::Subscriber do
     context 'when the request is well-formed' do
       it 'subscribes the given email to the configured list' do
         subscriber = described_class.new(
-          api_key: 'test_key',
-          public_key: 'test_public_key'
+          api_key: 'test_key'
         )
-        list_id = 'dummyListId'
+        list_id = 'TT5hjk'
         email = 'jdoe@example.com'
 
         VCR.use_cassette('subscriber') do
@@ -36,10 +33,9 @@ RSpec.describe SolidusKlaviyo::Subscriber do
     context 'when the request is rate-limited' do
       it 'raises a RateLimitedError' do
         subscriber = described_class.new(
-          api_key: 'test_key',
-          public_key: 'test_public_key'
+          api_key: 'test_key'
         )
-        list_id = 'dummyListId'
+        list_id = 'TT5hjk'
         email = 'jdoe@example.com'
 
         expect {
@@ -53,10 +49,9 @@ RSpec.describe SolidusKlaviyo::Subscriber do
     context 'when the request is malformed' do
       it 'raises a SubscriptionError' do
         subscriber = described_class.new(
-          api_key: 'test_key',
-          public_key: 'test_public_key'
+          api_key: 'test_key'
         )
-        list_id = 'wrongListId'
+        list_id = 'TT5hj2'
         email = 'jdoe@example.com'
 
         expect {
@@ -72,10 +67,9 @@ RSpec.describe SolidusKlaviyo::Subscriber do
     context 'when the request is well-formed' do
       it 'updates the given email on the configured list' do
         subscriber = described_class.new(
-          api_key: 'test_key',
-          public_key: 'test_public_key'
+          api_key: 'test_key'
         )
-        list_id = 'dummyListId'
+        list_id = 'TT5hjk'
         email = 'jdoe@example.com'
 
         VCR.use_cassette('update') do
@@ -91,10 +85,9 @@ RSpec.describe SolidusKlaviyo::Subscriber do
     context 'when the request is rate-limited' do
       it 'raises a RateLimitedError' do
         subscriber = described_class.new(
-          api_key: 'test_key',
-          public_key: 'test_public_key'
+          api_key: 'test_key'
         )
-        list_id = 'dummyListId'
+        list_id = 'TT5hjk'
         email = 'jdoe@example.com'
 
         expect {
@@ -108,10 +101,9 @@ RSpec.describe SolidusKlaviyo::Subscriber do
     context 'when the request is malformed' do
       it 'raises a SubscriptionError' do
         subscriber = described_class.new(
-          api_key: 'test_key',
-          public_key: 'test_public_key'
+          api_key: 'test_key'
         )
-        list_id = 'wrongListId'
+        list_id = 'TT5hj5'
         email = 'jdoe@example.com'
 
         expect {
@@ -127,11 +119,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
     context 'when the request is well-formed' do
       it 'updates the profile on the configured list' do
         subscriber = described_class.new(
-          api_key: 'test_key',
-          public_key: 'test_public_key'
+          api_key: 'test_key'
         )
-        list_id = 'dummyListId'
-        profile = {email: 'jdoe@example.com'}
+        list_id = 'TT5hjk'
+        profile = { email: 'jdoe@example.com' }
 
         VCR.use_cassette('update') do
           subscriber.bulk_update(list_id, profile)
@@ -146,11 +137,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
     context 'when the request is rate-limited' do
       it 'raises a RateLimitedError' do
         subscriber = described_class.new(
-          api_key: 'test_key',
-          public_key: 'test_public_key'
+          api_key: 'test_key'
         )
-        list_id = 'dummyListId'
-        profile = {email: 'jdoe@example.com'}
+        list_id = 'TT5hjk'
+        profile = { email: 'jdoe@example.com' }
 
         expect {
           VCR.use_cassette('update-rate-limited') do
@@ -163,11 +153,10 @@ RSpec.describe SolidusKlaviyo::Subscriber do
     context 'when the request is malformed' do
       it 'raises a SubscriptionError' do
         subscriber = described_class.new(
-          api_key: 'test_key',
-          public_key: 'test_public_key'
+          api_key: 'test_key'
         )
-        list_id = 'wrongListId'
-        profile = {email: 'jdoe@example.com'}
+        list_id = 'TT5hj5'
+        profile = { email: 'jdoe@example.com' }
 
         expect {
           VCR.use_cassette('update') do

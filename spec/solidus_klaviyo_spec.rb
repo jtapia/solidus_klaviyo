@@ -12,14 +12,12 @@ RSpec.describe SolidusKlaviyo do
 
       described_class.subscribe_now(
         'fakeList',
-        'jdoe@example.com',
-        property: 'value'
+        'jdoe@example.com'
       )
 
       expect(subscriber).to have_received(:subscribe).with(
         'fakeList',
-        'jdoe@example.com',
-        property: 'value'
+        'jdoe@example.com'
       )
     end
   end
@@ -28,14 +26,12 @@ RSpec.describe SolidusKlaviyo do
     it 'enqueues a SubscribeJob' do
       described_class.subscribe_later(
         'fakeList',
-        'jdoe@example.com',
-        property: 'value'
+        'jdoe@example.com'
       )
 
       expect(SolidusKlaviyo::SubscribeJob).to have_been_enqueued.with(
         'fakeList',
-        'jdoe@example.com',
-        property: 'value',
+        'jdoe@example.com'
       )
     end
   end
@@ -58,7 +54,7 @@ RSpec.describe SolidusKlaviyo do
       expect(subscriber).to have_received(:update).with(
         'fakeList',
         'jdoe@example.com',
-        property: 'value',
+        property: 'value'
       )
     end
   end
@@ -74,7 +70,7 @@ RSpec.describe SolidusKlaviyo do
       expect(SolidusKlaviyo::UpdateJob).to have_been_enqueued.with(
         'fakeList',
         'jdoe@example.com',
-        property: 'value',
+        property: 'value'
       )
     end
   end
@@ -89,7 +85,6 @@ RSpec.describe SolidusKlaviyo do
       allow(described_class).to receive(:subscriber) { subscriber }
 
       described_class.bulk_update_now(
-        'fakeList',
         {
             email: 'jdoe@example.com',
             first_name: 'John'

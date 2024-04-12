@@ -15,8 +15,7 @@ module SolidusKlaviyo
 
               SolidusKlaviyo.subscribe_later(
                 SolidusKlaviyo.configuration.default_list,
-                email,
-                SolidusTracking::Serializer::User.serialize(self),
+                email
               )
             end
           end

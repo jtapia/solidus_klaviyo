@@ -21,27 +21,94 @@ http_interactions:
       message: Too Many Requests
     headers:
       Allow:
-        - GET, POST, DELETE, HEAD, OPTIONS
+      - GET, POST, DELETE, HEAD, OPTIONS
       Content-Type:
-        - application/json
+      - application/json
       Date:
-        - Wed, 22 Jul 2020 13:40:48 GMT
+      - Wed, 22 Jul 2020 13:40:48 GMT
       Server:
-        - nginx
+      - nginx
       Vary:
-        - Accept-Encoding
-        - Cookie
+      - Accept-Encoding
+      - Cookie
       X-Upstream:
-        - Sync-Api
-        - Sync-Api
+      - Sync-Api
+      - Sync-Api
       Content-Length:
-        - '22'
+      - '22'
       Connection:
-        - keep-alive
+      - keep-alive
       retry-after:
-        60
+      - 60
     body:
       encoding: ASCII-8BIT
       string: '{"detail":""}'
   recorded_at: Thu, 24 Dec 2020 22:39:22 GMT
-recorded_with: VCR 6.0.0
+- request:
+    method: get
+    uri: https://a.klaviyo.com/api/profiles/?filter=any(email,%5B%27TT5hjk%27%5D)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - klaviyo-api-ruby/6.0.0
+      Content-Type:
+      - application/json
+      Revision:
+      - '2024-02-15'
+      Accept:
+      - application/json
+      Authorization:
+      - Klaviyo-API-Key pk_969f31237a8adf114b9a6c3197422c6cea
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Fri, 12 Apr 2024 03:29:00 GMT
+      Content-Type:
+      - application/vnd.api+json
+      Content-Length:
+      - '133'
+      Cf-Ray:
+      - 873021290cd827df-SAN
+      Cf-Cache-Status:
+      - DYNAMIC
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Content-Language:
+      - en-us
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Language, Cookie
+      Cid:
+      - ULsCv3
+      Content-Security-Policy:
+      - object-src 'none'; frame-ancestors 'self' login.bigcommerce.com *.mybigcommerce.com
+        admin.shopify.com klaviyo.file.force.com klaviyo.lightning.force.com klaviyo.my.salesforce.com;
+        base-uri 'none'; script-src 'report-sample' 'strict-dynamic' 'unsafe-eval'
+        https://cdn.ampproject.org/; report-uri /csp/
+      Ratelimit-Limit:
+      - 75, 75;w=1, 700;w=60
+      Ratelimit-Remaining:
+      - '73'
+      Ratelimit-Reset:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Klaviyo-Api-Revision:
+      - '2024-02-15'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Server:
+      - cloudflare
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"links":{"self":"https://a.klaviyo.com/api/profiles/?filter=any%28email%2C%5B%27TT5hjk%27%5D%29","next":null,"prev":null}}'
+  recorded_at: Fri, 12 Apr 2024 03:29:00 GMT
+recorded_with: VCR 6.2.0

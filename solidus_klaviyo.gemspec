@@ -30,9 +30,10 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'solidus_core'
   s.add_dependency 'solidus_support', '~> 0.5'
+
   s.add_dependency 'httparty', '~> 0.18'
   s.add_dependency 'solidus_tracking'
-  s.add_dependency 'klaviyo_sdk'
+  s.add_dependency 'klaviyo-api-sdk'
 
   s.add_development_dependency 'pry'
   s.add_development_dependency 'solidus_dev_support', '~> 2.5'

@@ -56,4 +56,71 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '0'
   recorded_at: Wed, 20 Jul 2022 19:40:59 GMT
-recorded_with: VCR 6.1.0
+- request:
+    method: post
+    uri: https://a.klaviyo.com/api/events/
+    body:
+      encoding: UTF-8
+      string: '{"data":{"type":"event","attributes":{"properties":{"foo":"bar","name":"Started
+        Checkout"},"metric":{"data":{"type":"metric","attributes":{"name":"Started
+        Checkout"}}},"profile":{"data":{"type":"profile","attributes":{"email":"jdoe@example.com"}}}}}}'
+    headers:
+      User-Agent:
+      - klaviyo-api-ruby/6.0.0
+      Content-Type:
+      - application/json
+      Revision:
+      - '2024-02-15'
+      Accept:
+      - application/json
+      Authorization:
+      - Klaviyo-API-Key pk_969f31237a8adf114b9a6c3197422c6cea
+      Expect:
+      - ''
+  response:
+    status:
+      code: 202
+      message: ''
+    headers:
+      Date:
+      - Fri, 12 Apr 2024 03:36:14 GMT
+      Content-Length:
+      - '0'
+      Cf-Ray:
+      - 87302bc009156a31-SAN
+      Cf-Cache-Status:
+      - DYNAMIC
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Content-Language:
+      - en-us
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Language, Cookie
+      Cid:
+      - ULsCv3
+      Content-Security-Policy:
+      - frame-ancestors 'self' login.bigcommerce.com *.mybigcommerce.com admin.shopify.com
+        klaviyo.file.force.com klaviyo.lightning.force.com klaviyo.my.salesforce.com;
+        base-uri 'none'; object-src 'none'; script-src 'report-sample' 'strict-dynamic'
+        'unsafe-eval' https://cdn.ampproject.org/; report-uri /csp/
+      Ratelimit-Limit:
+      - 350, 350;w=1, 3500;w=60
+      Ratelimit-Remaining:
+      - '349'
+      Ratelimit-Reset:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Klaviyo-Api-Revision:
+      - '2024-02-15'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Server:
+      - cloudflare
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+  recorded_at: Fri, 12 Apr 2024 03:36:14 GMT
+recorded_with: VCR 6.2.0
