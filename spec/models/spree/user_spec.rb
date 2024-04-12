@@ -6,7 +6,9 @@ RSpec.describe Spree::LegacyUser, type: :model do
       it 'subscribes the user to the default list' do
         allow(SolidusKlaviyo.configuration).to receive(:default_list)
           .and_return('dummyList')
+
         properties = { 'first_name' => 'John' }
+
         allow(SolidusTracking::Serializer::User).to receive(:serialize)
           .and_return(properties)
 
@@ -23,6 +25,7 @@ RSpec.describe Spree::LegacyUser, type: :model do
       it 'does not subscribe the user to any list' do
         allow(SolidusKlaviyo.configuration)
             .to receive(:default_list).and_return(nil)
+
         create(:user)
 
         expect(SolidusKlaviyo::SubscribeJob).not_to have_been_enqueued

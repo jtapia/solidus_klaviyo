@@ -8,40 +8,105 @@ http_interactions:
       string: '{"api_key":"secret123","token":"publicKey","profiles":[{"email":"jdoe@example.com"}]}'
     headers:
       Content-Type:
-        - application/json
+      - application/json
       Accept:
-        - application/json
+      - application/json
       Accept-Encoding:
-        - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       User-Agent:
-        - Ruby
+      - Ruby
   response:
     status:
       code: 429
       message: Too Many Requests
     headers:
       Allow:
-        - GET, POST, DELETE, HEAD, OPTIONS
+      - GET, POST, DELETE, HEAD, OPTIONS
       Content-Type:
-        - application/json
+      - application/json
       Date:
-        - Wed, 22 Jul 2020 13:40:48 GMT
+      - Wed, 22 Jul 2020 13:40:48 GMT
       Server:
-        - nginx
+      - nginx
       Vary:
-        - Accept-Encoding
-        - Cookie
+      - Accept-Encoding
+      - Cookie
       X-Upstream:
-        - Sync-Api
-        - Sync-Api
+      - Sync-Api
+      - Sync-Api
       Content-Length:
-        - '22'
+      - '22'
       Connection:
-        - keep-alive
+      - keep-alive
       retry-after:
-        60
+      - 60
     body:
       encoding: ASCII-8BIT
       string: '{"detail":""}'
   recorded_at: Fri, 13 Nov 2020 11:01:00 GMT
-recorded_with: VCR 6.0.0
+- request:
+    method: post
+    uri: https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/
+    body:
+      encoding: UTF-8
+      string: '{"data":{"type":"profile-subscription-bulk-create-job","attributes":{"profiles":{"data":[{"type":"profile","attributes":{"email":"jdoe@example.com","subscriptions":{"email":{"marketing":{"consent":"SUBSCRIBED"}}}}}]}},"relationships":{"list":{"data":{"type":"list","id":"TT5hjk"}}}}}'
+    headers:
+      User-Agent:
+      - klaviyo-api-ruby/6.0.0
+      Content-Type:
+      - application/json
+      Revision:
+      - '2024-02-15'
+      Accept:
+      - application/json
+      Authorization:
+      - Klaviyo-API-Key pk_969f31237a8adf114b9a6c3197422c6cea
+      Expect:
+      - ''
+  response:
+    status:
+      code: 202
+      message: ''
+    headers:
+      Date:
+      - Fri, 12 Apr 2024 03:29:00 GMT
+      Content-Length:
+      - '0'
+      Cf-Ray:
+      - 8730212bcfab27df-SAN
+      Cf-Cache-Status:
+      - DYNAMIC
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Content-Language:
+      - en-us
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Language, Cookie
+      Cid:
+      - ULsCv3
+      Content-Security-Policy:
+      - base-uri 'none'; frame-ancestors 'self' login.bigcommerce.com *.mybigcommerce.com
+        admin.shopify.com klaviyo.file.force.com klaviyo.lightning.force.com klaviyo.my.salesforce.com;
+        object-src 'none'; script-src 'report-sample' 'strict-dynamic' 'unsafe-eval'
+        https://cdn.ampproject.org/; report-uri /csp/
+      Ratelimit-Limit:
+      - 75, 75;w=1, 700;w=60
+      Ratelimit-Remaining:
+      - '73'
+      Ratelimit-Reset:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Klaviyo-Api-Revision:
+      - '2024-02-15'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Server:
+      - cloudflare
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+  recorded_at: Fri, 12 Apr 2024 03:29:00 GMT
+recorded_with: VCR 6.2.0

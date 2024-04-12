@@ -120,4 +120,72 @@ http_interactions:
         \   <a href=\"http://help.klaviyo.com\">Support</a> |\n    <a href=\"https://www.twitter.com/klaviyo\">@klaviyo</a>\n
         \ </p>\n</body>\n</html>\n"
   recorded_at: Wed, 22 Jul 2020 13:43:16 GMT
-recorded_with: VCR 6.0.0
+- request:
+    method: post
+    uri: https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/
+    body:
+      encoding: UTF-8
+      string: '{"data":{"type":"profile-subscription-bulk-create-job","attributes":{"profiles":{"data":[{"type":"profile","attributes":{"email":"jdoe@example.com","subscriptions":{"email":{"marketing":{"consent":"SUBSCRIBED"}}}}}]}},"relationships":{"list":{"data":{"type":"list","id":"TT5hj2"}}}}}'
+    headers:
+      User-Agent:
+      - klaviyo-api-ruby/6.0.0
+      Content-Type:
+      - application/json
+      Revision:
+      - '2024-02-15'
+      Accept:
+      - application/json
+      Authorization:
+      - Klaviyo-API-Key pk_969f31237a8adf114b9a6c3197422c6cea
+      Expect:
+      - ''
+  response:
+    status:
+      code: 400
+      message: ''
+    headers:
+      Date:
+      - Fri, 12 Apr 2024 03:29:00 GMT
+      Content-Type:
+      - application/vnd.api+json
+      Content-Length:
+      - '194'
+      Cf-Ray:
+      - 8730212a7e5327df-SAN
+      Cf-Cache-Status:
+      - DYNAMIC
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Content-Language:
+      - en-us
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Language, Cookie
+      Cid:
+      - ULsCv3
+      Content-Security-Policy:
+      - base-uri 'none'; frame-ancestors 'self' login.bigcommerce.com *.mybigcommerce.com
+        admin.shopify.com klaviyo.file.force.com klaviyo.lightning.force.com klaviyo.my.salesforce.com;
+        script-src 'report-sample' 'strict-dynamic' 'unsafe-eval' https://cdn.ampproject.org/;
+        object-src 'none'; report-uri /csp/
+      Ratelimit-Limit:
+      - 75, 75;w=1, 700;w=60
+      Ratelimit-Remaining:
+      - '74'
+      Ratelimit-Reset:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Klaviyo-Api-Revision:
+      - '2024-02-15'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Server:
+      - cloudflare
+    body:
+      encoding: ASCII-8BIT
+      string: '{"errors":[{"id":"87cf418b-4eed-421f-a129-e41adfb6542e","status":400,"code":"invalid","title":"Invalid
+        input.","detail":"List not found with id TT5hj2.","source":{"pointer":"/data"},"meta":{}}]}'
+  recorded_at: Fri, 12 Apr 2024 03:29:00 GMT
+recorded_with: VCR 6.2.0
