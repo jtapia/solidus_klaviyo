@@ -34,7 +34,7 @@ module SolidusKlaviyo
     end
 
     def update_now(email, properties = {})
-      subscriber.update(list_id, email, properties)
+      subscriber.update(email, properties)
     end
 
     def update_later(email, properties = {})
@@ -106,22 +106,19 @@ module SolidusKlaviyo
 
     def subscriber
       @subscriber ||= SolidusKlaviyo::Subscriber.new(
-        api_key: configuration.api_key,
-        public_key: configuration.public_key
+        api_key: configuration.api_key
       )
     end
 
     def profiler
       @profiler ||= SolidusKlaviyo::Profiler.new(
-        api_key: configuration.api_key,
-        public_key: configuration.public_key
+        api_key: configuration.api_key
       )
     end
 
     def tracker
       @tracker ||= SolidusKlaviyo::Tracker.new(
-        api_key: configuration.api_key,
-        public_key: configuration.public_key
+        api_key: configuration.api_key
       )
     end
   end

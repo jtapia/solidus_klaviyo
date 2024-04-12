@@ -2,7 +2,7 @@
 
 module SolidusKlaviyo
   class Subscriber
-    attr_reader :api_key, :public_key
+    attr_reader :api_key
 
     class << self
       def from_config
@@ -11,13 +11,12 @@ module SolidusKlaviyo
           config.api_key['Klaviyo-API-Key'] = "Klaviyo-API-Key #{SolidusKlaviyo.configuration.api_key}"
         end
 
-        new(api_key: SolidusKlaviyo.configuration.api_key)
+        new(api_key: ::SolidusKlaviyo.configuration.api_key)
       end
     end
 
-    def initialize(api_key:, public_key:)
+    def initialize(api_key:)
       @api_key = api_key
-      @public_key = public_key
     end
 
     def subscribe(list_id, email)
@@ -57,8 +56,8 @@ module SolidusKlaviyo
       ::KlaviyoAPI::Profiles.subscribe_profiles(payload)
     end
 
-    def update(id, email, properties = {})
-      profile = SolidusKlaviyo::Profiler.get_profile_by_email(email)
+    def update(email, properties = {})
+      profile = ::SolidusKlaviyo.get_profile_by_email(email)
       profile_id = profile[:data][0].try(:[], :id)
 
       payload = {
@@ -107,11 +106,11 @@ module SolidusKlaviyo
       profiles.each do |profile|
         profiles_payload << {
           type: 'profile',
-          id: profile[:id],
+          id: profile.try(:[], :id),
           attributes: {
-            email: profile[:email],
-            first_name: profile[:first_name],
-            last_name: profile[:last_name]
+            email: profile.try(:[], :email),
+            first_name: profile.try(:[], :first_name),
+            last_name: profile.try(:[], :last_name)
           }
         }
       end

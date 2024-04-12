@@ -9,7 +9,7 @@ module SolidusKlaviyo
           config.api_key['Klaviyo-API-Key'] = "Klaviyo-API-Key #{SolidusKlaviyo.configuration.api_key}"
         end
 
-        new(api_key: SolidusKlaviyo.configuration.api_key)
+        new(api_key: ::SolidusKlaviyo.configuration.api_key)
       end
     end
 

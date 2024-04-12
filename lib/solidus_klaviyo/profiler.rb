@@ -2,29 +2,28 @@
 
 module SolidusKlaviyo
   class Profiler
-    attr_reader :api_key, :public_key
+    attr_reader :api_key
 
     class << self
       def from_config
         # Setup authorization
-        KlaviyoAPI.configure do |config|
-          config.api_key['Klaviyo-API-Key'] = "Klaviyo-API-Key #{SolidusKlaviyo.configuration.api_key}"
+        ::KlaviyoAPI.configure do |config|
+          config.api_key['Klaviyo-API-Key'] = "Klaviyo-API-Key #{::SolidusKlaviyo.configuration.api_key}"
         end
 
-        new(api_key: SolidusKlaviyo.configuration.api_key)
+        new(api_key: ::SolidusKlaviyo.configuration.api_key)
       end
     end
 
-    def initialize(api_key:, public_key:)
+    def initialize(api_key:)
       @api_key = api_key
-      @public_key = public_key
     end
 
-    def get_profile(id, query)
+    def get_profile(id, query = {})
       ::KlaviyoAPI::Profiles.get_profile(id, query)
     end
 
-    def get_profiles(query)
+    def get_profiles(query = {})
       ::KlaviyoAPI::Profiles.get_profiles(query)
     end
 
