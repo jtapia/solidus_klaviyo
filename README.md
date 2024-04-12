@@ -46,14 +46,14 @@ If you want to subscribe a user to a Klaviyo list, the extension provides a hand
 that:
 
 ```ruby
-SolidusKlaviyo.subscribe_now('YOUR_LIST_ID', 'jdoe@example.com', custom_property: 'value') 
+SolidusKlaviyo.subscribe_now('YOUR_LIST_ID', 'jdoe@example.com') 
 ```
 
 We recommend using the built-in background job to subscribe users, in order to avoid blocking your
 web workers and slowing down the customer:
 
 ```ruby
-SolidusKlaviyo.subscribe_later('YOUR_LIST_ID', 'jdoe@example.com', custom_property: 'value')
+SolidusKlaviyo.subscribe_later('YOUR_LIST_ID', 'jdoe@example.com')
 ```
 
 #### Subscribing all users upon signup
@@ -77,7 +77,7 @@ created.
 Updating an existing user on a list is just as easy as adding them.
 
 ```ruby
-SolidusKlaviyo.update_now('YOUR_LIST_ID', 'jdoe@example.com', custom_property: 'value') 
+SolidusKlaviyo.update_now('jdoe@example.com', custom_property: 'value') 
 ```
 
 Just like with subscribing, we recommend using the built-in background job to update users,
@@ -92,7 +92,7 @@ For bulk updates, you'll want to provide the emails and custom properties in a s
 like so:
 
 ```ruby
-SolidusKlaviyo.bulk_update_later('YOUR_LIST_ID', [{email: 'jdoe@example.com', custom_property: 'value'}])
+SolidusKlaviyo.bulk_update_later('jdoe@example.com', { custom_property: 'value' })
 ```
 
 ## Development
